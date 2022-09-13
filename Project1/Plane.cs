@@ -82,7 +82,15 @@ namespace Project1
         //抽象方法,根据飞机当前位置来判断是否应该转弯的方法，待实现
         public bool If_turn() { return false; }
         //抽象方法,飞机的转弯方法，由YH实现
-        public bool Turn(){return true;}
+        public bool Turn()
+        {   
+            this.fly_time++;
+            double turningR = this.kongzhong_speed * this.kongzhong_speed / (Math.Tan(this.slope) * 9.8);
+            double turningRate = 9.8 * Math.Tan(this.slope) / this.kongzhong_speed;
+            this.now_location.X = this.now_location.X + turningR * Math.Cos(turningRate * Math.PI / 180);
+            this.now_location.Y = this.now_location.Y + turningR * Math.Sin(turningRate * Math.PI / 180);
+            return true;
+        }
 
         //显示飞机的信息
         public string Show_information()
